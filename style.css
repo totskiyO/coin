@@ -1,0 +1,23 @@
+body {
+    background-color: pink;
+}
+
+#image {
+    width: 90%;
+    align-self: flex-start;
+}
+
+#box {
+    height: 1svh;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin: auto;
+}
+
+h1 {
+    font-size: 10svh;
+    font-family: calibri;
+    color: white;
+}
