@@ -1,19 +1,30 @@
 body {
-    background-color: pink;
+    background-color: rgb(255, 212, 241);
 }
 
 #image {
-    width: 90%;
-    align-self: flex-start;
+    width: 100%;
+    height: auto;
+    align-self: center;
+}
+
+.image-div {
+    display: flex;
+    justify-content: center;
+    width: 90svw;
+    height: 90svw;
+    background-color: antiquewhite;
 }
 
 #box {
-    height: 1svh;
+    height: 100%;
     margin: 20px;
     padding: 10px;
     border-radius: 5px;
     text-align: center;
     margin: auto;
+    border-radius: 10svh;
+    background-color: #ffc8fc;
 }
 
 h1 {

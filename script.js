@@ -9,7 +9,7 @@ window.onload = function() {
     image.onclick = function(e) {
         counter.textContent = parseInt(counter.textContent) + 1;
         image.style.width = "75%";
-        if (counter.textContent == 100) {
+        if (counter.textContent % 100 == 0) {
             sound1000.play();
         }
     }
@@ -18,5 +18,4 @@ window.onload = function() {
 setInterval(function() {
     var image = document.getElementById("image");
     image.style.width = image.offsetWidth + ((defaultWidth - image.offsetWidth) * 0.05) + "px";
-    image.style.position[1]
 }, 1/60)
