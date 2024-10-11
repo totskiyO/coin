@@ -13,7 +13,8 @@ body {
     justify-content: center;
     width: 90svw;
     height: 90svw;
-    background-color: antiquewhite;
+    border-radius: 10svh;
+    background-color: #ffc8fc;
 }
 
 #box {
@@ -23,8 +24,6 @@ body {
     border-radius: 5px;
     text-align: center;
     margin: auto;
-    border-radius: 10svh;
-    background-color: #ffc8fc;
 }
 
 h1 {
