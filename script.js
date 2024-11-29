@@ -3,7 +3,8 @@ var defaultWidth = 0;
 window.onload = function() {
     var image = document.getElementById("image");
     var counter = document.getElementById("counter");
-    var sound1000 = new Audio('1000.mp3');
+    var sound1000 = new Audio('/sounds/1000.mp3');
+    var menu_button = document.getElementById("menu_button");
     defaultWidth = image.offsetWidth;
 
     image.onclick = function(e) {
@@ -13,6 +14,11 @@ window.onload = function() {
             sound1000.play();
         }
     }
+
+    menu_button.onclick = function() {
+        document.getElementById("menu").showModal();
+    }
+
 }
 
 setInterval(function() {

@@ -31,3 +31,36 @@ h1 {
     font-family: calibri;
     color: white;
 }
+
+.panel-div {
+    justify-content: center;
+    border-radius: 1svh;
+    background-color: #ffc8fc;
+    padding: 1svh;
+}
+
+.menu_button {
+    width: 10svh;
+    height: 10svh;
+    background-color: rgb(255, 212, 241);
+    color: white;
+    border: white 5px solid;
+    border-radius: 1svh;
+    font-size: 3svh;
+    font-weight: 700;
+    transition: 0.25s;
+}
+
+.menu_button:hover {
+    background-color: rgb(200, 150, 220);
+    scale: 1.1;
+    border-radius: 2svh;
+    font-size: 3.1svh;
+}
+
+.menu {
+    display: none;
+    position: fixed;
+    left
+    transition: 1s;
+}
