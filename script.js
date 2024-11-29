@@ -3,7 +3,7 @@ var defaultWidth = 0;
 window.onload = function() {
     var image = document.getElementById("image");
     var counter = document.getElementById("counter");
-    var sound1000 = new Audio('/sounds/1000.mp3');
+    var sound1000 = new Audio('sounds/1000.mp3');
     var menu_button = document.getElementById("menu_button");
     defaultWidth = image.offsetWidth;
 
