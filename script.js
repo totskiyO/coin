@@ -5,6 +5,7 @@ window.onload = function() {
     var counter = document.getElementById("counter");
     var sound1000 = new Audio('sounds/1000.mp3');
     var menu_button = document.getElementById("menu_button");
+    var back_button = document.getElementById("back_button");
     defaultWidth = image.offsetWidth;
 
     image.onclick = function(e) {
@@ -17,6 +18,10 @@ window.onload = function() {
 
     menu_button.onclick = function() {
         document.getElementById("menu").showModal();
+    }
+
+    back_button.onclick = function() {
+        document.getElementById("menu").close();
     }
 
 }

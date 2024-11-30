@@ -32,6 +32,26 @@ h1 {
     color: white;
 }
 
+button {
+    background-color: rgb(255, 212, 241);
+    color: white;
+    border: white 5px solid;
+    border-radius: 1svh;
+    font-size: 3svh;
+    font-weight: 700;
+    transition: 0.25s;
+}
+
+ul {
+    color: #ffc8fc;
+}
+
+a {
+    color: #ffc8fc;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 .panel-div {
     justify-content: center;
     border-radius: 1svh;
@@ -51,7 +71,7 @@ h1 {
     transition: 0.25s;
 }
 
-.menu_button:hover {
+button:hover {
     background-color: rgb(200, 150, 220);
     scale: 1.1;
     border-radius: 2svh;
@@ -60,9 +80,44 @@ h1 {
 
 .menu {
     position: fixed;
-    left: 0;
+    left: -50%;
     top: 0;
-    width: 100%;
+    width: 50%;
     height: 100%;
-    transition: 1s;
+    background-color: #ffffff;
+    border-radius: 2svh;
+    border-color: #ffc8fc;
+    transition: display 0.5s allow-discrete, overlay 1s allow-discrete;
+    animation: close 0.4s forwards;
+    &[open] {
+        animation: open 0.5s forwards;
+    }
+}
+
+.back_button {
+    background-color: white;
+    color: rgb(255, 212, 241);
+    border: rgb(255, 212, 241) 5px solid;
+    border-radius: 1svh;
+    font-size: 3svh;
+    font-weight: 700;
+    transition: 0.25s;
+}
+
+@keyframes open {
+    from {
+      left: -200%;
+    }
+    to {
+      left: -50%;
+    }
+}
+  
+@keyframes close {
+    from {
+      left: -50%;
+    }
+    to {
+      left: -200%;
+    }
 }
