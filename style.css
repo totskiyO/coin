@@ -60,11 +60,8 @@ a {
 }
 
 .menu_button {
-    width: 10svh;
+    width: 11 svh;
     height: 10svh;
-    background-color: rgb(255, 212, 241);
-    color: white;
-    border: white 5px solid;
     border-radius: 1svh;
     font-size: 3svh;
     font-weight: 700;
@@ -102,6 +99,7 @@ button:hover {
     font-size: 3svh;
     font-weight: 700;
     transition: 0.25s;
+    margin-left: 50%;
 }
 
 @keyframes open {
