@@ -28,8 +28,26 @@ body {
 
 h1 {
     font-size: 10svh;
-    font-family: calibri;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white;
+    text-align: center;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 5svh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    font-weight: 600;
+    margin: 0;
+}
+
+p {
+    font-size: 3svh;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    font-weight: 600;
+    margin: 0;
 }
 
 button {

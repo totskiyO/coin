@@ -1,7 +1,6 @@
 var defaultWidth = 0;
 
 window.onload = function() {
-    alert("totskiy");
     var image = document.getElementById("image");
     var counter = document.getElementById("counter");
     var sound1000 = new Audio('sounds/1000.mp3');
