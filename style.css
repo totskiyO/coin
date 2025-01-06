@@ -1,11 +1,23 @@
 body {
-    background-color: rgb(255, 212, 241);
+    background: linear-gradient(180deg, #8e2de2, #4a00e0);
+    background-size: cover;
+    height: 100vh;
+    font-family: 'Baloo 2';
+    margin: 0;
+    overflow: hidden;
 }
 
 #image {
     width: 100%;
     height: auto;
     align-self: center;
+    border-color: white;
+    border-style: solid;
+    border-width: 0.8svh;
+    border-radius: 50%;
+    padding: 0.5svh;
+    box-shadow: 0 0 2svh #fff;
+    transition: all cubic-bezier(0.25, 1.5, 0.5, 1) 0.5s;
 }
 
 .image-div {
@@ -14,7 +26,8 @@ body {
     width: 90svw;
     height: 90svw;
     border-radius: 10svh;
-    background-color: #ffc8fc;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1svh;
 }
 
 #box {
@@ -28,15 +41,29 @@ body {
 
 h1 {
     font-size: 10svh;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white;
     text-align: center;
     font-weight: 600;
 }
 
+.counter {
+    background-color: rgb(0, 0, 0, 0.3);
+    padding: 0;
+    width: fit-content;
+    min-width: 25svh;
+    height: fit-content;
+    padding-left: 1svh;
+    padding-right: 1svh;
+    border-radius: 2svh;
+}
+
+.counter-div {
+    justify-content: center;
+    display: flex;
+}
+
 h2 {
     font-size: 5svh;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white;
     font-weight: 600;
     margin: 0;
@@ -44,20 +71,21 @@ h2 {
 
 p {
     font-size: 3svh;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white;
     font-weight: 600;
     margin: 0;
 }
 
 button {
-    background-color: rgb(255, 212, 241);
     color: white;
-    border: white 5px solid;
+    border: white 0.5svh solid;
     border-radius: 1svh;
     font-size: 3svh;
     font-weight: 700;
     transition: 0.25s;
+    background-color: #303f9f;
+    color: #ffffff;
+    font-family: 'Baloo 2';
 }
 
 ul {
@@ -67,30 +95,28 @@ ul {
 a {
     color: #ffc8fc;
     font-weight: bold;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 3svh;
 }
 
 .panel-div {
     justify-content: center;
     border-radius: 1svh;
-    background-color: #ffc8fc;
+    background-color: rgba(0, 0, 0, 0.3);
     padding: 1svh;
 }
 
 .menu_button {
-    width: 11 svh;
+    width: 10svh;
     height: 10svh;
     border-radius: 1svh;
     font-size: 3svh;
-    font-weight: 700;
     transition: 0.25s;
 }
 
 button:hover {
     background-color: rgb(200, 150, 220);
+    box-shadow: 0 0 1svh #ffffff;
     scale: 1.1;
-    border-radius: 2svh;
     font-size: 3.1svh;
 }
 
@@ -137,4 +163,50 @@ button:hover {
     to {
       left: -200%;
     }
+}
+
+.error {
+    color: red;
+    font-weight: bolder;
+}
+
+a {
+    padding: 0;
+    font-style: normal;
+    text-decoration: none;
+    position: relative;
+    transition: all ease 1s;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    bottom: 0.2svh;
+    left: 0;
+    width: 0;
+    height: 0.5svh;
+    background-color: #ffc8fc;
+    transition: width 0.3s ease;
+    border-radius: 0.3svh;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+.back {
+    color: #ffffff;
+    font-weight: bold;
+    transition: all ease 1s;
+    padding: 0.5svh 0.75svh;
+    background-color: rgb(255, 255, 255, 0.3);
+    border-radius: 1svh;
+    margin: 0;
+    padding: 0;
+    padding-left: 1svh;
+    padding-right: 1svh;
+}
+
+.back::after {
+    background-color: #ffffff;
 }

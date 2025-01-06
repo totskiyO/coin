@@ -1,3 +1,5 @@
+const ws = new WebSocket('ws://134.249.176.116:8765');
+
 var defaultWidth = 0;
 
 window.onload = function() {
@@ -10,9 +12,17 @@ window.onload = function() {
 
     image.onclick = function(e) {
         counter.textContent = parseInt(counter.textContent) + 1;
-        image.style.width = "75%";
         if (counter.textContent % 100 == 0) {
             sound1000.play();
+            image.style.scale = 5;
+            setTimeout(function() {
+                image.style.scale = 1;
+            }, 500);
+        } else {
+            image.style.scale = 0.5;
+            setTimeout(function() {
+                image.style.scale = 1;
+            }, 100);
         }
     }
 
@@ -24,9 +34,35 @@ window.onload = function() {
         document.getElementById("menu").close();
     }
 
+    document.body.style.opacity = "0";
+    document.body.style.visibility = "hidden";
 }
 
-setInterval(function() {
-    var image = document.getElementById("image");
-    image.style.width = image.offsetWidth + ((defaultWidth - image.offsetWidth) * 0.05) + "px";
-}, 1/60)
+ws.onopen = function() {
+    console.log('Connected to server');
+    document.body.style.opacity = "1";
+    document.body.style.visibility = "visible";
+    const to_send = {'action': 'init', 'phone': '', 'name': ''};
+    ws.send(JSON.stringify(to_send))
+};
+
+ws.onmessage = function(event) {
+    console.log('Received message:', event.data);
+    const data = JSON.parse(event.data);
+    if (data.action === 'coins') {
+        var counter = document.getElementById('counter');
+        counter.textContent = data.coins;
+    }
+};
+
+ws.onclose = function(event) {
+    console.log('Connection closed');
+    while (document.body.childNodes.length > 0) {
+        document.body.removeChild(document.body.childNodes[0]);
+    }
+    var error = document.createElement("p");
+    error.textContent = "Connection to the server was lost.";
+    error.className = "error";
+    document.body.appendChild(error);
+    ws.close();
+};

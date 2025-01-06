@@ -1,1 +1,1 @@
-npx http-server H:\Projects\JavaScript\coin -o -p 8000
+npx http-server E:\Projects\JavaScript\TotskiyCoin\coin -o -p 8000
