@@ -1,4 +1,4 @@
-const ws = new WebSocket('ws://134.249.176.116:8765');
+const ws = new WebSocket('wss://134.249.176.116:8765');
 
 var defaultWidth = 0;
 
