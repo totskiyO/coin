@@ -1,14 +1,11 @@
 const ws = new WebSocket('wss://134.249.176.116:8765');
 
-var defaultWidth = 0;
-
 window.onload = function() {
     var image = document.getElementById("image");
     var counter = document.getElementById("counter");
     var sound1000 = new Audio('sounds/1000.mp3');
     var menu_button = document.getElementById("menu_button");
     var back_button = document.getElementById("back_button");
-    defaultWidth = image.offsetWidth;
 
     image.onclick = function(e) {
         counter.textContent = parseInt(counter.textContent) + 1;
