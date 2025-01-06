@@ -1,4 +1,4 @@
-const ws = new WebSocket('wss://134.249.176.116:8765');
+const ws = new WebSocket('ws://goose-des.us.to:8765');
 
 window.onload = function() {
     var image = document.getElementById("image");
@@ -31,8 +31,8 @@ window.onload = function() {
         document.getElementById("menu").close();
     }
 
-    document.body.style.opacity = "0";
-    document.body.style.visibility = "hidden";
+    /*document.body.style.opacity = "0";
+    document.body.style.visibility = "hidden";*/
 }
 
 ws.onopen = function() {
