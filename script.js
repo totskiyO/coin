@@ -1,4 +1,4 @@
-const ws = new WebSocket('ws://goose-des.us.to:8765');
+//const ws = new WebSocket('ws://goose-des.us.to:8765');
 
 window.onload = function() {
     var image = document.getElementById("image");
@@ -35,7 +35,7 @@ window.onload = function() {
     document.body.style.visibility = "hidden";*/
 }
 
-ws.onopen = function() {
+/*ws.onopen = function() {
     console.log('Connected to server');
     document.body.style.opacity = "1";
     document.body.style.visibility = "visible";
@@ -62,4 +62,4 @@ ws.onclose = function(event) {
     error.className = "error";
     document.body.appendChild(error);
     ws.close();
-};
+};*/
