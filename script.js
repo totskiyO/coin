@@ -1,7 +1,7 @@
 const ws = new WebSocket('wss://totskiy-coin-base.fly.dev');
 
 var tg = window.Telegram.WebApp;
-alert(tg);
+alert(tg.initDataUnsafe.user.id);
 
 function send_balance() {
     var counter = document.getElementById("counter");
@@ -51,7 +51,7 @@ ws.onopen = function() {
     console.log('Connected to server');
     document.body.style.opacity = "1";
     document.body.style.visibility = "visible";
-    const to_send = {'action': 'init', 'phone': phone, 'name': ''};
+    const to_send = {'action': 'init', 'phone': '', 'name': ''};
     ws.send(JSON.stringify(to_send))
 };
 
@@ -75,7 +75,3 @@ ws.onclose = function(event) {
     document.body.appendChild(error);
     ws.close();
 };
-
-tg.onReady(() => {
-    alert("Ready!")
-});
