@@ -76,15 +76,15 @@ ws.onclose = function(event) {
 };
 
 Telegram.WebApp.onReady(() => {
-    const user = Telegram.WebApp.initDataUnsafe.user;
+    const user = Telegram.WebApp.initData.user;
     if (user) {
       console.log(`First Name: ${user.first_name}`);
       console.log(`Last Name: ${user.last_name}`);
       console.log(`Username: ${user.username}`);
       console.log(`User ID: ${user.phone}`);
-      phone = user.phone;
+      phone = user.username;
       alert("Totskiy");
     } else {
       console.log("User information is not available.");
     }
-  });
+});
