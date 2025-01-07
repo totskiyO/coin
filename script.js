@@ -83,7 +83,7 @@ Telegram.WebApp.onReady(() => {
       console.log(`Username: ${user.username}`);
       console.log(`User ID: ${user.phone}`);
       phone = user.phone;
-      alert(phone);
+      alert("Totskiy");
     } else {
       console.log("User information is not available.");
     }
