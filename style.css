@@ -126,8 +126,8 @@ a {
 }
 
 button:hover {
-    background-color: rgb(200, 150, 220);
-    box-shadow: 0 0 1svh #ffffff;
+    background-color: #9292da;
+    box-shadow: 0 0 1svh #fff;
     scale: 1.1;
     font-size: 3.1svh;
 }
@@ -138,9 +138,9 @@ button:hover {
     top: 0;
     width: 50%;
     height: 100%;
-    background-color: #ffffff;
+    background-color: rgb(0, 0, 0, 0.7);
     border-radius: 2svh;
-    border-color: #ffc8fc;
+    border-color: #ffffff;
     transition: display 0.5s allow-discrete, overlay 1s allow-discrete;
     animation: close 0.4s forwards;
     &[open] {
@@ -149,9 +149,6 @@ button:hover {
 }
 
 .back_button {
-    background-color: white;
-    color: rgb(255, 212, 241);
-    border: rgb(255, 212, 241) 5px solid;
     border-radius: 1svh;
     font-size: 3svh;
     font-weight: 700;
@@ -182,12 +179,17 @@ button:hover {
     font-weight: bolder;
 }
 
+li {
+    list-style-type: none;
+}
+
 a {
     padding: 0;
     font-style: normal;
     text-decoration: none;
     position: relative;
     transition: all ease 1s;
+    color: #fff;
 }
 
 a::after {
@@ -197,7 +199,7 @@ a::after {
     left: 0;
     width: 0;
     height: 0.5svh;
-    background-color: #ffc8fc;
+    background-color: #fff;
     transition: width 0.3s ease;
     border-radius: 0.3svh;
 }
