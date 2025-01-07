@@ -1,5 +1,4 @@
 const ws = new WebSocket('wss://totskiy-coin-base.fly.dev');
-//const ws = new WebSocket('ws://134.249.176.116:8080');
 
 function send_balance() {
     var counter = document.getElementById("counter");
@@ -49,7 +48,7 @@ ws.onopen = function() {
     console.log('Connected to server');
     document.body.style.opacity = "1";
     document.body.style.visibility = "visible";
-    const to_send = {'action': 'init', 'phone': '', 'name': ''};
+    const to_send = {'action': 'init', 'phone': phone, 'name': ''};
     ws.send(JSON.stringify(to_send))
 };
 
@@ -73,3 +72,16 @@ ws.onclose = function(event) {
     document.body.appendChild(error);
     ws.close();
 };
+
+Telegram.WebApp.onReady(() => {
+    const user = Telegram.WebApp.initDataUnsafe.user;
+    if (user) {
+      console.log(`First Name: ${user.first_name}`);
+      console.log(`Last Name: ${user.last_name}`);
+      console.log(`Username: ${user.username}`);
+      console.log(`User ID: ${user.phone}`);
+      phone = user.phone;
+    } else {
+      console.log("User information is not available.");
+    }
+  });

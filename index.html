@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Totskiy</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,26 +12,29 @@
 </head>
 <body>
     <script src="script.js"></script>
-    <div class="panel-div">
-        <button class="menu_button" id="menu_button">Menu</button>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <div class="content">
+        <div class="panel-div">
+            <button class="menu_button" id="menu_button">Menu</button>
+        </div>
+        <div name="box" id="box">
+            <div class="counter-div">
+                <h1 id="counter" class="counter">0</h1>
+            </div>
+            <div class="image-div">
+                <img name="image" id="image" src="images/totskiy.png" alt="totskiy">
+            </div>
+        </div>
+        <dialog class="menu" id="menu">
+            <div>
+                <ul class="menu_elements" id="menu_div">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button id="back_button" class="back_button">Back</button>
+            </div>
+        </dialog>
     </div>
-    <div name="box" id="box">
-        <div class="counter-div">
-            <h1 id="counter" class="counter">0</h1>
-        </div>
-        <div class="image-div">
-            <img name="image" id="image" src="images/totskiy.png" alt="totskiy">
-        </div>
-    </div>
-    <dialog class="menu" id="menu">
-        <div>
-            <ul class="menu_elements" id="menu_div">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <button id="back_button" class="back_button">Back</button>
-        </div>
-    </dialog>
 </body>
 </html>
