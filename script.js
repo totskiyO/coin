@@ -75,6 +75,6 @@ ws.onclose = function(event) {
     ws.close();
 };
 
-tg.ready(() => {
+tg.onReady(() => {
     alert("Ready!")
 });
