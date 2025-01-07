@@ -1,7 +1,5 @@
 const ws = new WebSocket('wss://totskiy-coin-base.fly.dev');
 
-alert("Script is running");
-
 function send_balance() {
     var counter = document.getElementById("counter");
     const to_send = {'action': 'set_balance', 'phone': '', 'coins': parseInt(counter.textContent)};
