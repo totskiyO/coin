@@ -1,5 +1,4 @@
-//const ws = new WebSocket('wss://totskiy-coin-base.fly.dev');
-const ws = new WebSocket('ws://134.249.176.116:8080');
+const ws = new WebSocket('wss://totskiy-coin-base.fly.dev');
 
 var tg = window.Telegram.WebApp;
 var user = tg.initDataUnsafe.user;
@@ -74,6 +73,8 @@ window.onload = function() {
     
     ws.onclose = function(event) {
         console.log('Connection closed');
+        document.body.style.opacity = "1";
+        document.body.style.visibility = "visible";
         while (document.body.childNodes.length > 0) {
             document.body.removeChild(document.body.childNodes[0]);
         }
