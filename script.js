@@ -1,4 +1,11 @@
-//const ws = new WebSocket('ws://goose-des.us.to:8765');
+const ws = new WebSocket('wss://totskiy-coin-base.fly.dev');
+//const ws = new WebSocket('ws://134.249.176.116:8080');
+
+function send_balance() {
+    var counter = document.getElementById("counter");
+    const to_send = {'action': 'set_balance', 'phone': '', 'coins': parseInt(counter.textContent)};
+    ws.send(JSON.stringify(to_send))
+}
 
 window.onload = function() {
     var image = document.getElementById("image");
@@ -15,6 +22,7 @@ window.onload = function() {
             setTimeout(function() {
                 image.style.scale = 1;
             }, 500);
+            send_balance();
         } else {
             image.style.scale = 0.5;
             setTimeout(function() {
@@ -31,11 +39,13 @@ window.onload = function() {
         document.getElementById("menu").close();
     }
 
-    /*document.body.style.opacity = "0";
-    document.body.style.visibility = "hidden";*/
+    setInterval(send_balance, 10000);
+
+    document.body.style.opacity = "0";
+    document.body.style.visibility = "hidden";
 }
 
-/*ws.onopen = function() {
+ws.onopen = function() {
     console.log('Connected to server');
     document.body.style.opacity = "1";
     document.body.style.visibility = "visible";
@@ -62,4 +72,4 @@ ws.onclose = function(event) {
     error.className = "error";
     document.body.appendChild(error);
     ws.close();
-};*/
+};
