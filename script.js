@@ -1,6 +1,7 @@
 const ws = new WebSocket('wss://totskiy-coin-base.fly.dev');
 
 var tg = window.Telegram.WebApp;
+alert(tg);
 
 function send_balance() {
     var counter = document.getElementById("counter");
