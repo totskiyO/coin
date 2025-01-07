@@ -1,11 +1,18 @@
-const ws = new WebSocket('wss://totskiy-coin-base.fly.dev');
+//const ws = new WebSocket('wss://totskiy-coin-base.fly.dev');
+const ws = new WebSocket('ws://134.249.176.116:8080');
 
 var tg = window.Telegram.WebApp;
-alert(tg.initDataUnsafe.user.id);
+var user = tg.initDataUnsafe.user;
+if (user) {
+    var id = tg.initDataUnsafe.user.id;
+} else {
+    var id = 0;
+}
+
 
 function send_balance() {
     var counter = document.getElementById("counter");
-    const to_send = {'action': 'set_balance', 'phone': '', 'coins': parseInt(counter.textContent)};
+    const to_send = {'action': 'set_balance', 'id': id, 'coins': parseInt(counter.textContent)};
     ws.send(JSON.stringify(to_send))
 }
 
@@ -45,33 +52,35 @@ window.onload = function() {
 
     document.body.style.opacity = "0";
     document.body.style.visibility = "hidden";
+
+    ws.onopen = function() {
+        console.log('Connected to server');
+        document.body.style.opacity = "1";
+        document.body.style.visibility = "visible";
+        const to_send = {'action': 'init', 'id': id};
+        ws.send(JSON.stringify(to_send))
+    };
+
+    ws.onmessage = function(event) {
+        console.log('Received message:', event.data);
+        document.body.style.opacity = "1";
+        document.body.style.visibility = "visible";
+        const data = JSON.parse(event.data);
+        if (data.action === 'coins') {
+            var counter = document.getElementById('counter');
+            counter.textContent = data.coins;
+        }
+    };
+    
+    ws.onclose = function(event) {
+        console.log('Connection closed');
+        while (document.body.childNodes.length > 0) {
+            document.body.removeChild(document.body.childNodes[0]);
+        }
+        var error = document.createElement("p");
+        error.textContent = "Connection to the server was lost.";
+        error.className = "error";
+        document.body.appendChild(error);
+        ws.close();
+    };
 }
-
-ws.onopen = function() {
-    console.log('Connected to server');
-    document.body.style.opacity = "1";
-    document.body.style.visibility = "visible";
-    const to_send = {'action': 'init', 'phone': '', 'name': ''};
-    ws.send(JSON.stringify(to_send))
-};
-
-ws.onmessage = function(event) {
-    console.log('Received message:', event.data);
-    const data = JSON.parse(event.data);
-    if (data.action === 'coins') {
-        var counter = document.getElementById('counter');
-        counter.textContent = data.coins;
-    }
-};
-
-ws.onclose = function(event) {
-    console.log('Connection closed');
-    while (document.body.childNodes.length > 0) {
-        document.body.removeChild(document.body.childNodes[0]);
-    }
-    var error = document.createElement("p");
-    error.textContent = "Connection to the server was lost.";
-    error.className = "error";
-    document.body.appendChild(error);
-    ws.close();
-};
