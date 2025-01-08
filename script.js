@@ -1,5 +1,5 @@
-fetch("https://totskiy-coin-server.glitch.me/")
-const ws = new WebSocket('wss://totskiy-coin-server.glitch.me/');
+fetch("https://coin-server-q0w4.onrender.com");
+const ws = new WebSocket('wss://coin-server-q0w4.onrender.com/');
 
 var tg = window.Telegram.WebApp;
 var user = tg.initDataUnsafe.user;
