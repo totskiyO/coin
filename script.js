@@ -1,4 +1,5 @@
-const ws = new WebSocket('wss://totskiy-coin-base.fly.dev');
+fetch("https://totskiy-coin-server.glitch.me/")
+const ws = new WebSocket('wss://totskiy-coin-server.glitch.me/');
 
 var tg = window.Telegram.WebApp;
 var user = tg.initDataUnsafe.user;
@@ -47,7 +48,7 @@ window.onload = function() {
         document.getElementById("menu").close();
     }
 
-    setInterval(send_balance, 10000);
+    setInterval(send_balance, 7500);
 
     document.body.style.opacity = "0";
     document.body.style.visibility = "hidden";
