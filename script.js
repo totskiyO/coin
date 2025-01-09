@@ -16,6 +16,7 @@ function send_balance() {
     var counter = document.getElementById("counter");
     const to_send = {'action': 'set_balance', 'id': id, 'coins': parseInt(counter.textContent)};
     ws.send(JSON.stringify(to_send))
+    fetch("https://coin-server-q0w4.onrender.com");
 }
 
 window.onload = function() {
