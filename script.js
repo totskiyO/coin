@@ -32,7 +32,7 @@ window.onload = function() {
         } else {
             counter.textContent = parseInt(counter.textContent) + 1;
         }
-        if (counter.textContent % 1000 == 0) {
+        if (counter.textContent % 1000 == 0 && Math.floor(Math.random() * 2) == 0) {
             sound1000.play();
             image.style.scale = 10;
             image.style.rotate = 360;
