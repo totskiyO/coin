@@ -9,6 +9,7 @@ const SERVER = 'wss://coin-server-q0w4.onrender.com/';
 const ws = new WebSocket(SERVER);
 
 var is_2x = false;
+var is_inited = false;
 
 var tg = window.Telegram.WebApp;
 var user = tg.initDataUnsafe.user;
@@ -102,11 +103,13 @@ window.onload = function() {
         document.getElementById("loading-text").remove();
         document.getElementById("content").style.opacity = "1";
         document.getElementById("content").style.visibility = "visible";
-        const to_send = {'action': 'init', 'id': id};
-        sendJson(to_send);
     };
 
     ws.onmessage = function(event) {
+        if (!is_inited) {
+            onopen();
+        }
+        is_inited = true;
         console.log('Received message:', event.data);
         document.getElementById("content").style.opacity = "1";
         document.getElementById("content").style.visibility = "visible";
@@ -131,5 +134,17 @@ window.onload = function() {
         ws.close();
     };
 
-    onopen();
+    async function loop() {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        for (let i = 0; i < 100000; i++) {
+            console.log(i);
+            if (is_inited) {return;}
+            const to_send = {'action': 'init', 'id': id};
+            sendJson(to_send);
+            await new Promise((resolve) => setTimeout(resolve, 100));
+        }
+    }
+    
+    loop();
+
 }
