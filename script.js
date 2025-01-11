@@ -25,9 +25,11 @@ function sendJson(data) {
 }
 
 function send_balance() {
-    var counter = document.getElementById("counter");
-    const to_send = {'action': 'set_balance', 'id': id, 'coins': parseInt(counter.textContent)};
-    sendJson(to_send);
+    if (is_inited) {
+        var counter = document.getElementById("counter");
+        const to_send = {'action': 'set_balance', 'id': id, 'coins': parseInt(counter.textContent)};
+        sendJson(to_send);
+    }
 }
 
 window.onload = function() {
@@ -135,7 +137,7 @@ window.onload = function() {
     };
 
     async function loop() {
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         for (let i = 0; i < 100000; i++) {
             console.log(i);
             if (is_inited) {return;}
