@@ -1,5 +1,12 @@
-fetch("https://coin-server-q0w4.onrender.com");
-const ws = new WebSocket('wss://coin-server-q0w4.onrender.com/');
+function wakeup() {
+    try {
+        fetch("https://coin-server-q0w4.onrender.com");
+    } catch (e) {}
+}
+
+wakeup();
+const SERVER = 'wss://coin-server-q0w4.onrender.com/';
+const ws = new WebSocket(SERVER);
 
 var is_2x = false;
 
@@ -11,12 +18,15 @@ if (user) {
     var id = 0;
 }
 
+function sendJson(data) {
+    ws.send(JSON.stringify(data));
+    console.log("Sent: " + JSON.stringify(data));
+}
 
 function send_balance() {
     var counter = document.getElementById("counter");
     const to_send = {'action': 'set_balance', 'id': id, 'coins': parseInt(counter.textContent)};
-    ws.send(JSON.stringify(to_send))
-    fetch("https://coin-server-q0w4.onrender.com");
+    sendJson(to_send);
 }
 
 window.onload = function() {
@@ -77,6 +87,7 @@ window.onload = function() {
     }
 
     setInterval(send_balance, 7500);
+    setInterval(wakeup, 15000);
 
     document.getElementById("content").style.opacity = "0";
     document.getElementById("content").style.visibility = "hidden";
@@ -86,13 +97,13 @@ window.onload = function() {
     loading_text.id = "loading-text";
     document.body.appendChild(loading_text);
 
-    ws.onopen = function() {
+    function onopen() {
         console.log('Connected to server');
         document.getElementById("loading-text").remove();
         document.getElementById("content").style.opacity = "1";
         document.getElementById("content").style.visibility = "visible";
         const to_send = {'action': 'init', 'id': id};
-        ws.send(JSON.stringify(to_send))
+        sendJson(to_send);
     };
 
     ws.onmessage = function(event) {
@@ -119,4 +130,6 @@ window.onload = function() {
         document.body.appendChild(error);
         ws.close();
     };
+
+    onopen();
 }
