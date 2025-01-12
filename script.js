@@ -5,8 +5,8 @@ function wakeup() {
 }
 
 wakeup();
-const SERVER = 'wss://coin-server-q0w4.onrender.com/';
-const ws = new WebSocket(SERVER);
+const SERVER = 'https://coin-server-q0w4.onrender.com';
+const socket = io(SERVER);
 
 var is_2x = false;
 var is_inited = false;
@@ -20,14 +20,14 @@ if (user) {
 }
 
 function sendJson(data) {
-    ws.send(JSON.stringify(data));
+    socket.emit('message', JSON.stringify(data));
     console.log("Sent: " + JSON.stringify(data));
 }
 
 function send_balance() {
     if (is_inited) {
         var counter = document.getElementById("counter");
-        const to_send = {'action': 'set_balance', 'id': id, 'coins': parseInt(counter.textContent)};
+        const to_send = { 'action': 'set_balance', 'id': id, 'coins': parseInt(counter.textContent) };
         sendJson(to_send);
     }
 }
@@ -45,7 +45,7 @@ window.onload = function() {
         } else {
             counter.textContent = parseInt(counter.textContent) + 1;
         }
-        if (counter.textContent % 1000 == 0 && Math.floor(Math.random() * 2) == 0) {
+        if (counter.textContent % 1000 === 0 && Math.floor(Math.random() * 2) === 0) {
             sound1000.play();
             image.style.scale = 10;
             image.style.rotate = 360;
@@ -58,7 +58,7 @@ window.onload = function() {
             document.getElementById('content').classList.add('is_2x');
             document.getElementById('x2-text').style.top = '5%';
             document.getElementById('menu').style.opacity = '0';
-            document.getElementById('image').src = 'images/totskiy_agro.png'
+            document.getElementById('image').src = 'images/totskiy_agro.png';
             document.body.classList.add('is_2x_body');
             setTimeout(function() {
                 image.style.scale = 10;
@@ -68,26 +68,26 @@ window.onload = function() {
                 document.getElementById('x2-text').style.top = '-50%';
                 document.getElementById('menu').style.opacity = '1';
                 document.getElementById('menu').style.left = '-100%';
-                document.getElementById('image').src = 'images/totskiy.png'
+                document.getElementById('image').src = 'images/totskiy.png';
                 document.body.classList.remove('is_2x_body');
-            }, 10000)
+            }, 10000);
         } else {
             image.style.scale = 0.5;
             setTimeout(function() {
                 image.style.scale = 1;
             }, 100);
         }
-    }
+    };
 
     menu_button.onclick = function() {
         document.getElementById("menu").classList.add('opened');
         document.getElementById("menu").classList.remove('closed');
-    }
+    };
 
     back_button.onclick = function() {
         document.getElementById("menu").classList.add('closed');
         document.getElementById("menu").classList.remove('opened');
-    }
+    };
 
     setInterval(send_balance, 7500);
     setInterval(wakeup, 15000);
@@ -100,29 +100,26 @@ window.onload = function() {
     loading_text.id = "loading-text";
     document.body.appendChild(loading_text);
 
-    function onopen() {
+    socket.on('connect', function() {
         console.log('Connected to server');
         document.getElementById("loading-text").remove();
         document.getElementById("content").style.opacity = "1";
         document.getElementById("content").style.visibility = "visible";
-    };
+    });
 
-    ws.onmessage = function(event) {
+    socket.on('response', function(data) {
         if (!is_inited) {
-            onopen();
+            is_inited = true;
         }
-        is_inited = true;
-        console.log('Received message:', event.data);
-        document.getElementById("content").style.opacity = "1";
-        document.getElementById("content").style.visibility = "visible";
-        const data = JSON.parse(event.data);
-        if (data.action === 'coins') {
+        console.log('Received message:', data);
+        const parsedData = data;
+        if (parsedData.action === 'coins') {
             var counter = document.getElementById('counter');
-            counter.textContent = data.coins;
+            counter.textContent = parsedData.coins;
         }
-    };
-    
-    ws.onclose = function(event) {
+    });
+
+    socket.on('disconnect', function() {
         console.log('Connection closed');
         document.getElementById("content").style.opacity = "1";
         document.getElementById("content").style.visibility = "visible";
@@ -133,20 +130,18 @@ window.onload = function() {
         error.textContent = "Connection to the server was lost. Maybe restart would help?";
         error.className = "error";
         document.body.appendChild(error);
-        ws.close();
-    };
+    });
 
     async function loop() {
         await new Promise((resolve) => setTimeout(resolve, 1000));
         for (let i = 0; i < 100000; i++) {
             console.log(i);
-            if (is_inited) {return;}
-            const to_send = {'action': 'init', 'id': id};
+            if (is_inited) { return; }
+            const to_send = { 'action': 'init', 'id': id };
             sendJson(to_send);
             await new Promise((resolve) => setTimeout(resolve, 100));
         }
     }
-    
-    loop();
 
-}
+    loop();
+};
