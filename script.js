@@ -74,8 +74,10 @@ window.onload = function() {
             }, 10000);
         } else {
             image.style.scale = 0.5;
+            counter.style.scale = 1.25;
             setTimeout(function() {
                 image.style.scale = 1;
+                counter.style.scale = 1;
             }, 100);
         }
     };
@@ -140,7 +142,7 @@ window.onload = function() {
             if (is_inited) { return; }
             const to_send = { 'action': 'init', 'id': id };
             sendJson(to_send);
-            await new Promise((resolve) => setTimeout(resolve, 100));
+            await new Promise((resolve) => setTimeout(resolve, 500));
         }
     }
 
