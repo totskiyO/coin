@@ -10,6 +10,8 @@ const socket = io(SERVER);
 
 var is_2x = false;
 var is_inited = false;
+var is_blocked = false;
+var is_chilled = false;
 
 var tg = window.Telegram.WebApp;
 var user = tg.initDataUnsafe.user;
@@ -19,16 +21,35 @@ if (user) {
     var id = 0;
 }
 
+function popup(msg) {
+    var popup = document.createElement('div');
+    popup.className = 'popup';
+    var content = document.createElement('p');
+    content.textContent = msg;
+    content.className = 'popup-content';
+    popup.appendChild(content);
+    is_blocked = true;
+
+    document.body.appendChild(popup);
+    setTimeout(function() {
+        popup.remove();
+        is_blocked = false;
+    }, 5500);
+}
+
 function sendJson(data) {
     socket.emit('message', JSON.stringify(data));
     console.log("Sent: " + JSON.stringify(data));
 }
 
 function send_balance() {
-    if (is_inited) {
+    if (is_inited && !is_chilled && !is_blocked) {
         var counter = document.getElementById("counter");
         const to_send = { 'action': 'set_balance', 'id': id, 'coins': parseInt(counter.textContent) };
         sendJson(to_send);
+    }
+    if (is_chilled) {
+        is_chilled = false;
     }
 }
 
@@ -40,12 +61,15 @@ window.onload = function() {
     var back_button = document.getElementById("back_button");
 
     image.onclick = function(e) {
+        if (is_blocked) {
+            return;
+        }
         if (is_2x) {
             counter.textContent = parseInt(counter.textContent) + 2;
         } else {
             counter.textContent = parseInt(counter.textContent) + 1;
         }
-        if (Math.floor(Math.random() * 1000) === 0) {
+        if (Math.floor(Math.random() * 750) === 0) {
             sound1000.play();
             image.style.scale = 10;
             image.style.rotate = 360;
@@ -116,9 +140,14 @@ window.onload = function() {
         }
         console.log('Received message:', data);
         const parsedData = data;
-        if (parsedData.action === 'coins') {
+        if (parsedData.action == 'coins') {
             var counter = document.getElementById('counter');
             counter.textContent = parsedData.coins;
+        } else if (parsedData.action == 'chill') {
+            var counter = document.getElementById('counter');
+            counter.textContent = parsedData.coins;
+            popup("Hey, Chill Out! Not So Fast!");
+            is_chilled = true;
         }
     });
 

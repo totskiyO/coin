@@ -15,6 +15,40 @@ body {
     animation-fill-mode: both;
 }
 
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(0, 0, 0, 0.6);
+    border: #fff solid 0.5svh;
+    border-radius: 2svh;
+    padding: 2svh;
+    animation: fade-in-out 5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.popup-content {
+    text-align: center;
+    color: red;
+    font-weight: bolder;
+}
+
+@keyframes fade-in-out {
+    from {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    75% {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 .loading {
     position: fixed;
     background-color: rgb(0, 0, 0, 0.5);
