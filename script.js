@@ -45,7 +45,7 @@ window.onload = function() {
         } else {
             counter.textContent = parseInt(counter.textContent) + 1;
         }
-        if (counter.textContent % 1000 === 0 && Math.floor(Math.random() * 2) === 0) {
+        if (Math.floor(Math.random() * 1000) === 0) {
             sound1000.play();
             image.style.scale = 10;
             image.style.rotate = 360;
@@ -70,6 +70,7 @@ window.onload = function() {
                 document.getElementById('menu').style.left = '-100%';
                 document.getElementById('image').src = 'images/totskiy.png';
                 document.body.classList.remove('is_2x_body');
+                send_balance();
             }, 10000);
         } else {
             image.style.scale = 0.5;
@@ -89,7 +90,7 @@ window.onload = function() {
         document.getElementById("menu").classList.remove('opened');
     };
 
-    setInterval(send_balance, 7500);
+    setInterval(send_balance, 10000);
     setInterval(wakeup, 15000);
 
     document.getElementById("content").style.opacity = "0";
