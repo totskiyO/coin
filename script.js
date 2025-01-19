@@ -129,15 +129,15 @@ window.onload = function() {
 
     socket.on('connect', function() {
         console.log('Connected to server');
+        is_inited = true;
+        sendJson({ 'action': 'init', 'id': id });
         document.getElementById("loading-text").remove();
         document.getElementById("content").style.opacity = "1";
         document.getElementById("content").style.visibility = "visible";
     });
 
     socket.on('response', function(data) {
-        if (!is_inited) {
-            is_inited = true;
-        }
+        is_inited = true;
         console.log('Received message:', data);
         const parsedData = data;
         if (parsedData.action == 'coins') {
@@ -165,13 +165,13 @@ window.onload = function() {
     });
 
     async function loop() {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 1250));
         for (let i = 0; i < 100000; i++) {
             console.log(i);
             if (is_inited) { return; }
             const to_send = { 'action': 'init', 'id': id };
             sendJson(to_send);
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            await new Promise((resolve) => setTimeout(resolve, 1000));
         }
     }
 
